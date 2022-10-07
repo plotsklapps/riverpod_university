@@ -1,3 +1,6 @@
+//I realize it might not be best practice, but I like
+//working without clutter and an all_imports file gives
+//me peace and quiet.
 export 'package:flutter/material.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:flex_color_scheme/flex_color_scheme.dart';
