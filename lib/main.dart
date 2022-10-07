@@ -60,6 +60,7 @@ class MainEntry extends ConsumerWidget {
             ref.read(counterProvider.notifier).addOneOnClick();
           },
           child: const Icon(Icons.add),
+          tooltip: 'Guess what. This adds 1.',
         ),
       ),
     );
