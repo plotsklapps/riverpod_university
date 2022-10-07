@@ -13,6 +13,7 @@ Widget drawerWidget = Drawer(
                 ref.read(themeProvider.notifier).setLightTheme();
               },
               icon: const Icon(Icons.light_mode),
+              tooltip: 'Lightmode',
             );
           }),
         ),
@@ -25,6 +26,7 @@ Widget drawerWidget = Drawer(
               ref.read(themeProvider.notifier).setDarkTheme();
             },
             icon: const Icon(Icons.dark_mode),
+            tooltip: 'Darkmode',
           );
         }),
       ),

@@ -14,6 +14,7 @@ PreferredSizeWidget appbarWidget = AppBar(
           icon: const Icon(
             Icons.restart_alt,
           ),
+          tooltip: 'Reset ALL Providers',
         );
       },
     ),
