@@ -1,19 +1,20 @@
-# click_counter
+# Riverpod University
 
-A new Flutter project created with https://flutlab.io
+A Flutter project that showcases Riverpod possibilities created with https://flutlab.io
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a starting point for a Riverpod application and shows... practices.
+But maybe not the best ones. They're my practices.
+If you have any remarks, improvements or just want to hang out. Reach out to me
+on Twitter: @plotsklapps.
 
-A few resources to get you started if this is your first Flutter project:
+A few resources to get you started if this is your first Riverpod project:
 
-- https://flutter.dev/docs/get-started/codelab
-- https://flutter.dev/docs/cookbook
+- https://riverpod.dev/docs/getting_started/
+- https://codewithandrea.com/articles/flutter-state-management-riverpod/
 
-For help getting started with Flutter, view our
-https://flutter.dev/docs, which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I'm leaving this here to support Flutlab.io:
 
 ## Getting Started: FlutLab - Flutter Online IDE
 
