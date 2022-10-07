@@ -1,5 +1,8 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
+//I FREAKING LOVE FLEXCOLORSCHEME! I use it in
+//every single app and @RydMike should be knighted
+//for his work.
 ThemeData themeLight = FlexThemeData.light(
   scheme: FlexScheme.outerSpace,
   surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
@@ -14,7 +17,6 @@ ThemeData themeLight = FlexThemeData.light(
   useMaterial3ErrorColors: true,
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
-  // To use the playground font, add GoogleFonts package and uncomment
   fontFamily: GoogleFonts.questrial().fontFamily,
 );
 ThemeData themeDark = FlexThemeData.dark(
@@ -30,6 +32,5 @@ ThemeData themeDark = FlexThemeData.dark(
   useMaterial3ErrorColors: true,
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
-  // To use the playground font, add GoogleFonts package and uncomment
   fontFamily: GoogleFonts.questrial().fontFamily,
 );
