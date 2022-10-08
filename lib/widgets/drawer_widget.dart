@@ -56,6 +56,46 @@ Widget drawerWidget = Drawer(
           );
         }),
       ),
+      const ListTile(
+        title: Text('Set your favorite color'),
+      ),
+      Column(
+        children: [
+          Consumer(
+            builder: (context, ref, child) {
+              return ElevatedButton(
+                onPressed: () {
+                  ref.read(themeColorProvider.notifier).setThemeOuterSpace();
+                },
+                style: ElevatedButton.styleFrom(primary: Colors.grey),
+                child: const Text('Outer Space'),
+              );
+            },
+          ),
+          const SizedBox(height: 10.0),
+          Consumer(
+            builder: (context, ref, child) {
+              return ElevatedButton(
+                onPressed: () {
+                  ref.read(themeColorProvider.notifier).setThemeRedTornado();
+                },
+                style: ElevatedButton.styleFrom(primary: Colors.red),
+                child: const Text('Red Tornado'),
+              );
+            },
+          ),
+          const SizedBox(height: 10.0),
+          Consumer(builder: (context, ref, child) {
+            return ElevatedButton(
+              onPressed: () {
+                ref.read(themeColorProvider.notifier).setThemeGreenMoney();
+              },
+              style: ElevatedButton.styleFrom(primary: Colors.green),
+              child: const Text('Green Money'),
+            );
+          }),
+        ],
+      ),
     ],
   ),
 );

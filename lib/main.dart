@@ -21,12 +21,44 @@ class MainEntry extends ConsumerWidget {
   //Add 'WidgetRef ref' to the build() method to gain
   //acces to your providers (see providers folder)
   Widget build(BuildContext context, WidgetRef ref) {
+    ThemeData themeLight = FlexThemeData.light(
+      scheme: ref.watch(themeColorProvider),
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 26,
+      appBarOpacity: 0.85,
+      subThemesData: const FlexSubThemesData(
+        blendOnLevel: 20,
+        blendOnColors: false,
+        unselectedToggleIsColored: true,
+        dialogBackgroundSchemeColor: SchemeColor.background,
+      ),
+      useMaterial3ErrorColors: true,
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      useMaterial3: true,
+      fontFamily: GoogleFonts.questrial().fontFamily,
+    );
+    ThemeData themeDark = FlexThemeData.dark(
+      scheme: ref.watch(themeColorProvider),
+      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
+      blendLevel: 15,
+      appBarOpacity: 0.90,
+      subThemesData: const FlexSubThemesData(
+        blendOnLevel: 30,
+        unselectedToggleIsColored: true,
+        dialogBackgroundSchemeColor: SchemeColor.background,
+      ),
+      useMaterial3ErrorColors: true,
+      visualDensity: FlexColorScheme.comfortablePlatformDensity,
+      useMaterial3: true,
+      fontFamily: GoogleFonts.questrial().fontFamily,
+    );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Riverpod University',
-      //Watch the themeProvider, take the bool and return the
+      //Watch the themeModeProvider, take the bool and return the
       //correct theme according to flexcolorscheme.dart
-      theme: ref.watch(themeProvider) ? themeLight : themeDark,
+      theme: ref.watch(themeModeProvider) ? themeLight : themeDark,
       home: Scaffold(
         //Extracted appbar and drawer to separate
         //widgets, because I wanted to see if I
