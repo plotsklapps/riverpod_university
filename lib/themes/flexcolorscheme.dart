@@ -1,10 +1,12 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
+FlexScheme outerspaceFlexScheme = FlexScheme.outerSpace;
+
 //I FREAKING LOVE FLEXCOLORSCHEME! I use it in
 //every single app and @RydMike should be knighted
 //for his work.
 ThemeData themeLight = FlexThemeData.light(
-  scheme: FlexScheme.outerSpace,
+  scheme: outerspaceFlexScheme,
   surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
   blendLevel: 26,
   appBarOpacity: 0.85,
@@ -20,7 +22,7 @@ ThemeData themeLight = FlexThemeData.light(
   fontFamily: GoogleFonts.questrial().fontFamily,
 );
 ThemeData themeDark = FlexThemeData.dark(
-  scheme: FlexScheme.outerSpace,
+  scheme: outerspaceFlexScheme,
   surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
   blendLevel: 15,
   appBarOpacity: 0.90,

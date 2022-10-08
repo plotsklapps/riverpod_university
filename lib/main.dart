@@ -21,17 +21,12 @@ class MainEntry extends ConsumerWidget {
   //Add 'WidgetRef ref' to the build() method to gain
   //acces to your providers (see providers folder)
   Widget build(BuildContext context, WidgetRef ref) {
-    //Instantiate an instance of your provider, I write
-    //what they are because I'm used to it.
-    bool currentTheme = ref.watch(themeProvider);
-    int currentCount = ref.watch(counterProvider);
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Riverpod University',
-      //Take the bool and return the correct theme
-      //according to flexcolorscheme.dart
-      theme: currentTheme ? themeLight : themeDark,
+      //Watch the themeProvider, take the bool and return the
+      //correct theme according to flexcolorscheme.dart
+      theme: ref.watch(themeProvider) ? themeLight : themeDark,
       home: Scaffold(
         //Extracted appbar and drawer to separate
         //widgets, because I wanted to see if I
@@ -46,8 +41,9 @@ class MainEntry extends ConsumerWidget {
                 'You have pushed the button this many times:',
               ),
               Text(
-                //Just show the value the provider provides.
-                currentCount.toString(),
+                //Watch the counterProvider and
+                //show the value the provider provides.
+                ref.watch(counterProvider).toString(),
                 style: const TextStyle(fontSize: 25.0),
               ),
             ],
