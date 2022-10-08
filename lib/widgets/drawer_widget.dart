@@ -12,13 +12,13 @@ Widget drawerWidget = Drawer(
           builder: (context, ref, child) {
             return Switch(
                 //Watch the bool from theme_provider.dart
-                value: ref.watch(themeProvider),
+                value: ref.watch(themeModeProvider),
                 //Pass value to callback
                 onChanged: (value) {
                   if (value == true) {
-                    ref.read(themeProvider.notifier).setLightTheme();
+                    ref.read(themeModeProvider.notifier).setLightTheme();
                   } else {
-                    ref.read(themeProvider.notifier).setDarkTheme();
+                    ref.read(themeModeProvider.notifier).setDarkTheme();
                   }
                 });
           },
@@ -33,7 +33,7 @@ Widget drawerWidget = Drawer(
             return IconButton(
               onPressed: () {
                 //Use the function from theme_provider.dart
-                ref.read(themeProvider.notifier).setLightTheme();
+                ref.read(themeModeProvider.notifier).setLightTheme();
               },
               icon: const Icon(Icons.light_mode),
               tooltip: 'Lightmode',
@@ -49,7 +49,7 @@ Widget drawerWidget = Drawer(
           return IconButton(
             onPressed: () {
               //Use the function from theme_provider.dart
-              ref.read(themeProvider.notifier).setDarkTheme();
+              ref.read(themeModeProvider.notifier).setDarkTheme();
             },
             icon: const Icon(Icons.dark_mode),
             tooltip: 'Darkmode',
