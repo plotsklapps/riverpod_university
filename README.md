@@ -9,6 +9,8 @@ But maybe not the best ones. They're my practices.
 If you have any remarks, improvements or just want to hang out. Reach out to me
 on Twitter: @plotsklapps.
 
+This repo is a work in progress and grows as my knowledge grows!
+
 A few resources to get you started if this is your first Riverpod project:
 
 - https://riverpod.dev/docs/getting_started/
