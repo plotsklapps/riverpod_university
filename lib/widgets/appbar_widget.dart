@@ -9,7 +9,8 @@ PreferredSizeWidget appbarWidget = AppBar(
         return IconButton(
           onPressed: () {
             ref.invalidate(counterProvider);
-            ref.invalidate(themeProvider);
+            ref.invalidate(themeModeProvider);
+            ref.invalidate(themeColorProvider);
           },
           icon: const Icon(
             Icons.restart_alt,
