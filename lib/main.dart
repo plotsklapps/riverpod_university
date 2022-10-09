@@ -23,13 +23,15 @@ class MainEntry extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ThemeData themeLight = FlexThemeData.light(
       scheme: ref.watch(themeColorProvider),
-      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      blendLevel: 26,
-      appBarOpacity: 0.85,
+      surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
+      blendLevel: 24,
+      appBarOpacity: 0.00,
       subThemesData: const FlexSubThemesData(
-        blendOnLevel: 20,
-        blendOnColors: false,
+        blendOnLevel: 24,
+        thinBorderWidth: 2.0,
         unselectedToggleIsColored: true,
+        inputDecoratorRadius: 24.0,
+        chipRadius: 24.0,
         dialogBackgroundSchemeColor: SchemeColor.background,
       ),
       useMaterial3ErrorColors: true,
@@ -39,12 +41,15 @@ class MainEntry extends ConsumerWidget {
     );
     ThemeData themeDark = FlexThemeData.dark(
       scheme: ref.watch(themeColorProvider),
-      surfaceMode: FlexSurfaceMode.highScaffoldLowSurface,
-      blendLevel: 15,
-      appBarOpacity: 0.90,
+      surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
+      blendLevel: 24,
+      appBarOpacity: 0.00,
       subThemesData: const FlexSubThemesData(
-        blendOnLevel: 30,
+        blendOnLevel: 24,
+        thinBorderWidth: 2.0,
         unselectedToggleIsColored: true,
+        inputDecoratorRadius: 24.0,
+        chipRadius: 24.0,
         dialogBackgroundSchemeColor: SchemeColor.background,
       ),
       useMaterial3ErrorColors: true,

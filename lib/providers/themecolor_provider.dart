@@ -12,11 +12,15 @@ class ThemeColorState extends StateNotifier<FlexScheme> {
     state = FlexScheme.outerSpace;
   }
 
+  void setThemeBlueDelight() {
+    state = FlexScheme.blue;
+  }
+
   void setThemeGreenMoney() {
     state = FlexScheme.money;
   }
 
-  void setThemeRedTornado() {
-    state = FlexScheme.red;
+  void setThemeRedWine() {
+    state = FlexScheme.redWine;
   }
 }
