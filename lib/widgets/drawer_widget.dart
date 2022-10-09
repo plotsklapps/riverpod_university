@@ -9,8 +9,7 @@ Widget drawerWidget =
       children: [
         Image.asset('assets/riverpod_university_logo.png'),
         ListTile(
-          title: Text(
-              'Thememode: ${ref.read(themeModeProvider) ? 'Yang' : 'Yin'}'),
+          title: Text('Mode: ${ref.read(themeModeProvider) ? 'Yang' : 'Yin'}'),
           trailing: Switch(
               //Watch the bool from theme_provider.dart
               value: ref.watch(themeModeProvider),
@@ -24,7 +23,7 @@ Widget drawerWidget =
               }),
         ),
         ListTile(
-          title: Text('Themecolor: ${ref.watch(themeColorStringProvider)}'),
+          title: Text('Color: ${ref.watch(themeColorStringProvider)}'),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -46,7 +45,7 @@ Widget drawerWidget =
                   border:
                       Border.all(width: 1.0, color: const Color(0xFF000000)),
                   borderRadius: BorderRadius.circular(12.0),
-                  color: Colors.grey,
+                  color: const Color(0xFF93A0A9),
                 ),
               ),
             ),
@@ -67,7 +66,7 @@ Widget drawerWidget =
                   border:
                       Border.all(width: 1.0, color: const Color(0xFF000000)),
                   borderRadius: BorderRadius.circular(12.0),
-                  color: Colors.blue,
+                  color: const Color(0xFF1565C0),
                 ),
               ),
             ),
@@ -88,7 +87,7 @@ Widget drawerWidget =
                   border:
                       Border.all(width: 1.0, color: const Color(0xFF000000)),
                   borderRadius: BorderRadius.circular(12.0),
-                  color: Colors.green,
+                  color: const Color(0xFF264E36),
                 ),
               ),
             ),
@@ -109,7 +108,7 @@ Widget drawerWidget =
                   border:
                       Border.all(width: 1.0, color: const Color(0xFF000000)),
                   borderRadius: BorderRadius.circular(12.0),
-                  color: Colors.red,
+                  color: const Color(0xFF9B1B30),
                 ),
               ),
             ),
