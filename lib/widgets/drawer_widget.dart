@@ -29,14 +29,17 @@ Widget drawerWidget =
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            GestureDetector(
+            InkWell(
               onTap: () {
                 ref.read(themeColorProvider.notifier).setThemeOuterSpace();
                 ref
                     .read(themeColorStringProvider.notifier)
                     .setThemeColorStringOuterSpace();
               },
-              child: Container(
+              customBorder: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Ink(
                 height: 48.0,
                 width: 48.0,
                 decoration: BoxDecoration(
@@ -47,14 +50,17 @@ Widget drawerWidget =
                 ),
               ),
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 ref.read(themeColorProvider.notifier).setThemeBlueDelight();
                 ref
                     .read(themeColorStringProvider.notifier)
                     .setThemeColorStringBlueDelight();
               },
-              child: Container(
+              customBorder: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Ink(
                 height: 48.0,
                 width: 48.0,
                 decoration: BoxDecoration(
@@ -65,14 +71,17 @@ Widget drawerWidget =
                 ),
               ),
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 ref.read(themeColorProvider.notifier).setThemeGreenMoney();
                 ref
                     .read(themeColorStringProvider.notifier)
                     .setThemeColorStringGreenMoney();
               },
-              child: Container(
+              customBorder: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Ink(
                 height: 48.0,
                 width: 48.0,
                 decoration: BoxDecoration(
@@ -83,14 +92,17 @@ Widget drawerWidget =
                 ),
               ),
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 ref.read(themeColorProvider.notifier).setThemeRedWine();
                 ref
                     .read(themeColorStringProvider.notifier)
                     .setThemeColorStringRedWine();
               },
-              child: Container(
+              customBorder: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Ink(
                 height: 48.0,
                 width: 48.0,
                 decoration: BoxDecoration(
