@@ -3,7 +3,8 @@
 A Flutter project that showcases Riverpod possibilities created with https://flutlab.io
 
 Realized thusfar: Counter, Light/Dark buttons, Light/Dark switch and AppTheme buttons.
-To do: Quiz, calculator.
+
+To do: ThemeColor switcher, setting sunglasses on monster when going dark.
 
 ## Getting Started
 
