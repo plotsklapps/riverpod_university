@@ -8,6 +8,7 @@ export 'package:google_fonts/google_fonts.dart';
 
 export 'package:riverpoduniversity/providers/thememode_provider.dart';
 export 'package:riverpoduniversity/providers/themecolor_provider.dart';
+export 'package:riverpoduniversity/providers/themecolorstring_provider.dart';
 export 'package:riverpoduniversity/providers/counter_provider.dart';
 
 export 'package:riverpoduniversity/widgets/appbar_widget.dart';

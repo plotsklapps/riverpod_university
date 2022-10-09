@@ -1,15 +1,16 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
-Widget drawerWidget = Drawer(
-  child: Column(
-    children: [
-      Image.asset('assets/riverpod_university_logo.png'),
-      //Wrap the ListTile in a Consumer() to get acces to refs,
-      //it wants a builder: (BuildContext, WidgetRef, Widget?)
-      Consumer(builder: (context, ref, child) {
-        return ListTile(
+Widget drawerWidget =
+//Wrap the Drawer in a Consumer() to get acces to refs,
+//it needs a builder: (BuildContext, WidgetRef, Widget?)
+    Consumer(builder: (context, ref, child) {
+  return Drawer(
+    child: Column(
+      children: [
+        Image.asset('assets/riverpod_university_logo.png'),
+        ListTile(
           title: Text(
-              'Current thememode: ${ref.read(themeModeProvider) ? 'Yang' : 'Yin'}'),
+              'Thememode: ${ref.read(themeModeProvider) ? 'Yang' : 'Yin'}'),
           trailing: Switch(
               //Watch the bool from theme_provider.dart
               value: ref.watch(themeModeProvider),
@@ -21,59 +22,88 @@ Widget drawerWidget = Drawer(
                   ref.read(themeModeProvider.notifier).setDarkTheme();
                 }
               }),
-        );
-      }),
-      const ListTile(
-        title: Text('Choose a themecolor:'),
-      ),
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Consumer(
-            builder: (context, ref, child) {
-              return ElevatedButton(
-                onPressed: () {
-                  ref.read(themeColorProvider.notifier).setThemeOuterSpace();
-                },
-                style: ElevatedButton.styleFrom(primary: Colors.grey),
-                child: const Text('Outer Space'),
-              );
-            },
-          ),
-          const SizedBox(height: 10.0),
-          Consumer(
-            builder: (context, ref, child) {
-              return ElevatedButton(
-                onPressed: () {
-                  ref.read(themeColorProvider.notifier).setThemeBlueDelight();
-                },
-                style: ElevatedButton.styleFrom(primary: Colors.blue),
-                child: const Text('Blue Delight'),
-              );
-            },
-          ),
-          const SizedBox(height: 10.0),
-          Consumer(builder: (context, ref, child) {
-            return ElevatedButton(
-              onPressed: () {
+        ),
+        ListTile(
+          title: Text('Themecolor: ${ref.watch(themeColorStringProvider)}'),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            GestureDetector(
+              onTap: () {
+                ref.read(themeColorProvider.notifier).setThemeOuterSpace();
+                ref
+                    .read(themeColorStringProvider.notifier)
+                    .setThemeColorStringOuterSpace();
+              },
+              child: Container(
+                height: 48.0,
+                width: 48.0,
+                decoration: BoxDecoration(
+                  border:
+                      Border.all(width: 1.0, color: const Color(0xFF000000)),
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: Colors.grey,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                ref.read(themeColorProvider.notifier).setThemeBlueDelight();
+                ref
+                    .read(themeColorStringProvider.notifier)
+                    .setThemeColorStringBlueDelight();
+              },
+              child: Container(
+                height: 48.0,
+                width: 48.0,
+                decoration: BoxDecoration(
+                  border:
+                      Border.all(width: 1.0, color: const Color(0xFF000000)),
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: Colors.blue,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
                 ref.read(themeColorProvider.notifier).setThemeGreenMoney();
+                ref
+                    .read(themeColorStringProvider.notifier)
+                    .setThemeColorStringGreenMoney();
               },
-              style: ElevatedButton.styleFrom(primary: Colors.green),
-              child: const Text('Green Money'),
-            );
-          }),
-          const SizedBox(height: 10.0),
-          Consumer(builder: (context, ref, child) {
-            return ElevatedButton(
-              onPressed: () {
+              child: Container(
+                height: 48.0,
+                width: 48.0,
+                decoration: BoxDecoration(
+                  border:
+                      Border.all(width: 1.0, color: const Color(0xFF000000)),
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: Colors.green,
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
                 ref.read(themeColorProvider.notifier).setThemeRedWine();
+                ref
+                    .read(themeColorStringProvider.notifier)
+                    .setThemeColorStringRedWine();
               },
-              style: ElevatedButton.styleFrom(primary: Colors.red),
-              child: const Text('Red Red Wine'),
-            );
-          }),
-        ],
-      ),
-    ],
-  ),
-);
+              child: Container(
+                height: 48.0,
+                width: 48.0,
+                decoration: BoxDecoration(
+                  border:
+                      Border.all(width: 1.0, color: const Color(0xFF000000)),
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+});
