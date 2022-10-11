@@ -1,4 +1,5 @@
 import 'package:riverpoduniversity/all_imports.dart';
+import 'package:riverpoduniversity/providers/themedata_provider.dart';
 
 void main() {
   //Somehow I think ensuring initialization has become mandatory?
@@ -21,49 +22,14 @@ class MainEntry extends ConsumerWidget {
   //Add 'WidgetRef ref' to the build() method to gain
   //acces to your providers (see providers folder)
   Widget build(BuildContext context, WidgetRef ref) {
-    ThemeData themeLight = FlexThemeData.light(
-      scheme: ref.watch(themeColorProvider),
-      surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
-      blendLevel: 24,
-      appBarOpacity: 0.00,
-      subThemesData: const FlexSubThemesData(
-        blendOnLevel: 24,
-        thinBorderWidth: 2.0,
-        unselectedToggleIsColored: true,
-        inputDecoratorRadius: 24.0,
-        chipRadius: 24.0,
-        dialogBackgroundSchemeColor: SchemeColor.background,
-      ),
-      useMaterial3ErrorColors: true,
-      visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      useMaterial3: true,
-      fontFamily: GoogleFonts.questrial().fontFamily,
-    );
-    ThemeData themeDark = FlexThemeData.dark(
-      scheme: ref.watch(themeColorProvider),
-      surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
-      blendLevel: 24,
-      appBarOpacity: 0.00,
-      subThemesData: const FlexSubThemesData(
-        blendOnLevel: 24,
-        thinBorderWidth: 2.0,
-        unselectedToggleIsColored: true,
-        inputDecoratorRadius: 24.0,
-        chipRadius: 24.0,
-        dialogBackgroundSchemeColor: SchemeColor.background,
-      ),
-      useMaterial3ErrorColors: true,
-      visualDensity: FlexColorScheme.comfortablePlatformDensity,
-      useMaterial3: true,
-      fontFamily: GoogleFonts.questrial().fontFamily,
-    );
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Riverpod University',
       //Watch the themeModeProvider, take the bool and return the
       //correct theme according to flexcolorscheme.dart
-      theme: ref.watch(themeModeProvider) ? themeLight : themeDark,
+      theme: ref.watch(themeModeProvider)
+          ? ref.watch(themeLightProvider)
+          : ref.watch(themeDarkProvider),
       home: Scaffold(
         //Extracted appbar and drawer to separate
         //widgets, because I wanted to see if I
