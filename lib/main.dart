@@ -13,7 +13,7 @@ void main() {
 }
 
 //Chose to use ConsumerWidget here, because I want to add
-//more complexity to the main screen soon.
+//more complexity to the main screen.
 class MainEntry extends ConsumerWidget {
   const MainEntry({Key? key}) : super(key: key);
 

@@ -11,5 +11,10 @@ export 'package:riverpoduniversity/providers/themecolor_provider.dart';
 export 'package:riverpoduniversity/providers/themecolorstring_provider.dart';
 export 'package:riverpoduniversity/providers/counter_provider.dart';
 
+export 'package:riverpoduniversity/themes/bluedelight_colors.dart';
+export 'package:riverpoduniversity/themes/greenmoney_colors.dart';
+export 'package:riverpoduniversity/themes/outerspace_colors.dart';
+export 'package:riverpoduniversity/themes/redredwine_colors.dart';
+
 export 'package:riverpoduniversity/widgets/appbar_widget.dart';
 export 'package:riverpoduniversity/widgets/drawer_widget.dart';
