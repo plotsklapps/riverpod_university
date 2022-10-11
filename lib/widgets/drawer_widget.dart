@@ -9,11 +9,12 @@ Widget drawerWidget =
       children: [
         Image.asset('assets/riverpod_university_logo.png'),
         ListTile(
+          //Use themeModeProvider's bool to return correct Text
           title: Text('Mode: ${ref.read(themeModeProvider) ? 'Yang' : 'Yin'}'),
           trailing: Switch(
               //Watch the bool from theme_provider.dart
               value: ref.watch(themeModeProvider),
-              //Pass value to callback
+              //Pass value to callback and call correct function
               onChanged: (value) {
                 if (value == true) {
                   ref.read(themeModeProvider.notifier).setLightTheme();
@@ -23,6 +24,7 @@ Widget drawerWidget =
               }),
         ),
         ListTile(
+          //Use ref.watch here, you want to continuously update
           title: Text('Color: ${ref.watch(themeColorStringProvider)}'),
         ),
         Row(
@@ -38,15 +40,9 @@ Widget drawerWidget =
               customBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
-              child: Ink(
-                height: 48.0,
-                width: 48.0,
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xFF000000)),
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: const Color(0xFF93A0A9),
-                ),
+              child: CustomInk(
+                tileColor: outerSpaceColorsLight.primary,
+                borderColor: Colors.black,
               ),
             ),
             InkWell(
@@ -59,15 +55,9 @@ Widget drawerWidget =
               customBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
-              child: Ink(
-                height: 48.0,
-                width: 48.0,
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xFF000000)),
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: const Color(0xFF1565C0),
-                ),
+              child: CustomInk(
+                tileColor: blueDelightColorsLight.primary,
+                borderColor: Colors.black,
               ),
             ),
             InkWell(
@@ -80,15 +70,9 @@ Widget drawerWidget =
               customBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
-              child: Ink(
-                height: 48.0,
-                width: 48.0,
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xFF000000)),
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: const Color(0xFF264E36),
-                ),
+              child: CustomInk(
+                tileColor: greenMoneyColorsLight.primary,
+                borderColor: Colors.black,
               ),
             ),
             InkWell(
@@ -101,15 +85,9 @@ Widget drawerWidget =
               customBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
               ),
-              child: Ink(
-                height: 48.0,
-                width: 48.0,
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xFF000000)),
-                  borderRadius: BorderRadius.circular(12.0),
-                  color: const Color(0xFF9B1B30),
-                ),
+              child: CustomInk(
+                tileColor: redRedWineColorsLight.primary,
+                borderColor: Colors.black,
               ),
             ),
           ],
@@ -118,3 +96,23 @@ Widget drawerWidget =
     ),
   );
 });
+
+class CustomInk extends StatelessWidget {
+  final Color? borderColor;
+  final Color? tileColor;
+
+  const CustomInk({Key? key, this.tileColor, this.borderColor})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Ink(
+      height: 48.0,
+      width: 48.0,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1.0, color: borderColor!),
+        borderRadius: BorderRadius.circular(12.0),
+        color: tileColor!,
+      ),
+    );
+  }
+}

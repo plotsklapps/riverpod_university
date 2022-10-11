@@ -5,8 +5,8 @@ final themeModeProvider = StateNotifierProvider<ThemeModeState, bool>((ref) {
   return ThemeModeState();
 });
 
-//ThemeState returns a starting value (true) and
-//has two functions to change this value accordingly.
+//ThemeState returns a starting value (true) of type bool
+//and has two functions to change this value accordingly.
 class ThemeModeState extends StateNotifier<bool> {
   ThemeModeState() : super(true);
 
