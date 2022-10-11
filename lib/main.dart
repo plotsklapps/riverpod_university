@@ -1,5 +1,4 @@
 import 'package:riverpoduniversity/all_imports.dart';
-import 'package:riverpoduniversity/providers/themedata_provider.dart';
 
 void main() {
   //Somehow I think ensuring initialization has become mandatory?
@@ -29,9 +28,10 @@ class MainEntry extends ConsumerWidget {
       //correct theme according to the themeDataProvider which
       //is split up in Light and Dark and has in turn access
       //to themeColorProvider. Kudos to me.
-      theme: ref.watch(themeModeProvider)
-          ? ref.watch(themeLightProvider)
-          : ref.watch(themeDarkProvider),
+      theme: ref.watch(themeLightProvider),
+      darkTheme: ref.watch(themeDarkProvider),
+      themeMode:
+          ref.watch(themeModeProvider) ? ThemeMode.light : ThemeMode.dark,
       home: Scaffold(
         //Extracted appbar and drawer to separate
         //widgets, because I wanted to see if I

@@ -1,7 +1,7 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
 Widget drawerWidget =
-//Wrap the Drawer in a Consumer() to get acces to refs,
+//Wrap the Drawer in a Consumer() to get access to refs,
 //it needs a builder: (BuildContext, WidgetRef, Widget?)
     Consumer(builder: (context, ref, child) {
   return Drawer(
