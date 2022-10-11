@@ -1,7 +1,11 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
+//Create a provider that returns a ThemeData of type
+//FlexThemeData, that in turn watches the themeColorProvider
+//to set the color to the chosen color
 final themeLightProvider = StateProvider<ThemeData>((ref) {
   return FlexThemeData.light(
+    //Can be found in themecolor_provider.dart
     scheme: ref.watch(themeColorProvider),
     surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
     blendLevel: 24,
@@ -21,8 +25,12 @@ final themeLightProvider = StateProvider<ThemeData>((ref) {
   );
 });
 
+//Create a provider that returns a ThemeData of type
+//FlexThemeData, that in turn watches the themeColorProvider
+//to set the color to the chosen color
 final themeDarkProvider = StateProvider<ThemeData>((ref) {
   return FlexThemeData.dark(
+    //Can be found in themecolor_provider.dart
     scheme: ref.watch(themeColorProvider),
     surfaceMode: FlexSurfaceMode.highScaffoldLevelSurface,
     blendLevel: 24,

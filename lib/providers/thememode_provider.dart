@@ -1,6 +1,6 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
-//Make a global counterprovider to ref it whereever you go
+//Make a global counterprovider to ref it wherever you go
 final themeModeProvider = StateNotifierProvider<ThemeModeState, bool>((ref) {
   return ThemeModeState();
 });

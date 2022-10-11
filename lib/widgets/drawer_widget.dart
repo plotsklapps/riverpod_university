@@ -32,6 +32,7 @@ Widget drawerWidget =
           children: [
             InkWell(
               onTap: () {
+                //Use ref.read here, you want to call a method
                 ref.read(themeColorProvider.notifier).setThemeOuterSpace();
                 ref
                     .read(themeColorStringProvider.notifier)
@@ -47,6 +48,7 @@ Widget drawerWidget =
             ),
             InkWell(
               onTap: () {
+                //Use ref.read here, you want to call a method
                 ref.read(themeColorProvider.notifier).setThemeBlueDelight();
                 ref
                     .read(themeColorStringProvider.notifier)
@@ -62,6 +64,7 @@ Widget drawerWidget =
             ),
             InkWell(
               onTap: () {
+                //Use ref.read here, you want to call a method
                 ref.read(themeColorProvider.notifier).setThemeGreenMoney();
                 ref
                     .read(themeColorStringProvider.notifier)
@@ -77,6 +80,7 @@ Widget drawerWidget =
             ),
             InkWell(
               onTap: () {
+                //Use ref.read here, you want to call a method
                 ref.read(themeColorProvider.notifier).setThemeRedWine();
                 ref
                     .read(themeColorStringProvider.notifier)

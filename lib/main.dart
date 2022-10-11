@@ -20,13 +20,15 @@ class MainEntry extends ConsumerWidget {
 
   @override
   //Add 'WidgetRef ref' to the build() method to gain
-  //acces to your providers (see providers folder)
+  //access to your providers (see providers folder)
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Riverpod University',
       //Watch the themeModeProvider, take the bool and return the
-      //correct theme according to flexcolorscheme.dart
+      //correct theme according to the themeDataProvider which
+      //is split up in Light and Dark and has in turn access
+      //to themeColorProvider. Kudos to me.
       theme: ref.watch(themeModeProvider)
           ? ref.watch(themeLightProvider)
           : ref.watch(themeDarkProvider),
@@ -58,8 +60,8 @@ class MainEntry extends ConsumerWidget {
             //on CounterState() class that adds 1 every click.
             ref.read(counterProvider.notifier).addOneOnClick();
           },
-          child: const Icon(Icons.add),
           tooltip: 'Guess what. This adds 1.',
+          child: const Icon(Icons.add),
         ),
       ),
     );
