@@ -18,77 +18,10 @@ Widget drawerWidget =
             ],
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Color: ${ref.watch(themeColorStringProvider)}'),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              InkWell(
-                onTap: () {
-                  //Use ref.read here, you want to call a method
-                  ref.read(themeColorProvider.notifier).setThemeOuterSpace();
-                  ref
-                      .read(themeColorStringProvider.notifier)
-                      .setThemeColorStringOuterSpace();
-                },
-                customBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: CustomInk(
-                  tileColor: outerSpaceColorsLight.primary,
-                  borderColor: Colors.black,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  //Use ref.read here, you want to call a method
-                  ref.read(themeColorProvider.notifier).setThemeBlueDelight();
-                  ref
-                      .read(themeColorStringProvider.notifier)
-                      .setThemeColorStringBlueDelight();
-                },
-                customBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: CustomInk(
-                  tileColor: blueDelightColorsLight.primary,
-                  borderColor: Colors.black,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  //Use ref.read here, you want to call a method
-                  ref.read(themeColorProvider.notifier).setThemeGreenMoney();
-                  ref
-                      .read(themeColorStringProvider.notifier)
-                      .setThemeColorStringGreenMoney();
-                },
-                customBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: CustomInk(
-                  tileColor: greenMoneyColorsLight.primary,
-                  borderColor: Colors.black,
-                ),
-              ),
-              InkWell(
-                onTap: () {
-                  //Use ref.read here, you want to call a method
-                  ref.read(themeColorProvider.notifier).setThemeRedWine();
-                  ref
-                      .read(themeColorStringProvider.notifier)
-                      .setThemeColorStringRedWine();
-                },
-                customBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0),
-                ),
-                child: CustomInk(
-                  tileColor: redRedWineColorsLight.primary,
-                  borderColor: Colors.black,
-                ),
-              ),
+              const ThemeColorSwitch(),
             ],
           ),
         ],
@@ -97,31 +30,11 @@ Widget drawerWidget =
   );
 });
 
-class CustomInk extends StatelessWidget {
-  final Color? borderColor;
-  final Color? tileColor;
-
-  const CustomInk({Key? key, this.tileColor, this.borderColor})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Ink(
-      height: 48.0,
-      width: 48.0,
-      decoration: BoxDecoration(
-        border: Border.all(width: 1.0, color: borderColor!),
-        borderRadius: BorderRadius.circular(12.0),
-        color: tileColor!,
-      ),
-    );
-  }
-}
-
 class ThemeModeSwitch extends ConsumerWidget {
   const ThemeModeSwitch({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(context, ref) {
     final List<bool> isSelected = [
       ref.watch(themeModeProvider) == ThemeMode.light,
       ref.watch(themeModeProvider) == ThemeMode.system,
@@ -142,10 +55,69 @@ class ThemeModeSwitch extends ConsumerWidget {
           ref.read(themeModeStringProvider.notifier).setThemeModeStringDark();
         }
       },
-      children: const <Widget>[
+      children: const [
         Icon(Icons.light_mode),
         Icon(Icons.phone_android),
         Icon(Icons.dark_mode),
+      ],
+    );
+  }
+}
+
+class ThemeColorSwitch extends ConsumerWidget {
+  const ThemeColorSwitch({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final List<bool> isSelected = [
+      ref.watch(themeColorProvider) == FlexScheme.outerSpace,
+      ref.watch(themeColorProvider) == FlexScheme.blue,
+      ref.watch(themeColorProvider) == FlexScheme.money,
+      ref.watch(themeColorProvider) == FlexScheme.redWine,
+    ];
+
+    return ToggleButtons(
+      isSelected: isSelected,
+      onPressed: (int newIndex) {
+        if (newIndex == 0) {
+          ref.read(themeColorProvider.notifier).setThemeOuterSpace();
+          ref
+              .read(themeColorStringProvider.notifier)
+              .setThemeColorStringOuterSpace();
+        } else if (newIndex == 1) {
+          ref.read(themeColorProvider.notifier).setThemeBlueDelight();
+          ref
+              .read(themeColorStringProvider.notifier)
+              .setThemeColorStringBlueDelight();
+        } else if (newIndex == 2) {
+          ref.read(themeColorProvider.notifier).setThemeGreenMoney();
+          ref
+              .read(themeColorStringProvider.notifier)
+              .setThemeColorStringGreenMoney();
+        } else {
+          ref.read(themeColorProvider.notifier).setThemeRedWine();
+          ref
+              .read(themeColorStringProvider.notifier)
+              .setThemeColorStringRedWine();
+        }
+      },
+      children: const [
+        Icon(
+          Icons.rocket_launch,
+          color: Colors.grey,
+        ),
+        Icon(
+          Icons.surfing,
+          color: Colors.blue,
+        ),
+        Icon(
+          Icons.payments,
+          color: Colors.green,
+        ),
+        Icon(
+          Icons.wine_bar,
+          color: Colors.red,
+        ),
       ],
     );
   }
