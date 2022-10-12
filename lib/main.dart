@@ -30,8 +30,7 @@ class MainEntry extends ConsumerWidget {
       //to themeColorProvider. Kudos to me.
       theme: ref.watch(themeLightProvider),
       darkTheme: ref.watch(themeDarkProvider),
-      themeMode:
-          ref.watch(themeModeProvider) ? ThemeMode.light : ThemeMode.dark,
+      themeMode: ref.watch(themeModeProvider),
       home: Scaffold(
         //Extracted appbar and drawer to separate
         //widgets, because I wanted to see if I
