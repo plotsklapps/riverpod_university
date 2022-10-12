@@ -24,13 +24,13 @@ class MainEntry extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Riverpod University',
-      //Watch the themeModeProvider, take the bool and return the
-      //correct theme according to the themeDataProvider which
-      //is split up in Light and Dark and has in turn access
-      //to themeColorProvider. Kudos to me.
+      //Watch the themeModeProvider and return ThemeMode.system
+      //in first instance. After that, user decides and controls
+      //the themeMode via themeDataProvider
       theme: ref.watch(themeLightProvider),
       darkTheme: ref.watch(themeDarkProvider),
       themeMode: ref.watch(themeModeProvider),
+      //SafeArea FTW. Makes your app evade notches and stuff
       home: SafeArea(
         child: Scaffold(
           //Extracted appbar and drawer to separate

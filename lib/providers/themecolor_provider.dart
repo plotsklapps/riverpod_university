@@ -1,6 +1,6 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
-//Make a global counterprovider to ref it wherever you go
+//Make a global themeColorProvider to ref it wherever you go
 final themeColorProvider =
     StateNotifierProvider<ThemeColorState, FlexScheme>((ref) {
   return ThemeColorState();
@@ -8,7 +8,7 @@ final themeColorProvider =
 
 //ThemeColorState returns a starting value (FlexScheme.outerSpace)
 //of type FlexScheme and has four functions to change this value
-//accordingly.
+//accordingly
 class ThemeColorState extends StateNotifier<FlexScheme> {
   ThemeColorState() : super(FlexScheme.outerSpace);
 

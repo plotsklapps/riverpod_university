@@ -1,7 +1,7 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
 //An AppBar() is a PreferredSizeWidget()! Otherwise
-//it won't work!
+//it won't work
 PreferredSizeWidget appbarWidget = AppBar(
   title: const Text('Riverpod University'),
   centerTitle: true,

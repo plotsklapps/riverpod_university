@@ -13,14 +13,20 @@ Widget drawerWidget =
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              //WATCH the themeModeStringProvider here, it
+              //returns the current String for the themeMode
               Text('Theme: ${ref.watch(themeModeStringProvider)}'),
+              //Look down
               const ThemeModeSwitch(),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              //WATCH the themeColorStringProvider here, it
+              //returns the current String for the themeColor
               Text('Color: ${ref.watch(themeColorStringProvider)}'),
+              //Look down
               const ThemeColorSwitch(),
             ],
           ),
@@ -42,15 +48,27 @@ class ThemeModeSwitch extends ConsumerWidget {
     ];
 
     return ToggleButtons(
+      //The state of each button is controlled by isSelected,
+      //which is a list of bools that determine if a button
+      //is in an active, disabled, or selected state.
+      //They are both correlated by their index in the list.
+      //The length of isSelected has to match
+      //the length of the children list.
       isSelected: isSelected,
       onPressed: (int newIndex) {
         if (newIndex == 0) {
+          //Set the state of themeModeProvider to ThemeMode.light
+          //and set the String of themeModeStringProvider
           ref.read(themeModeProvider.state).state = ThemeMode.light;
           ref.read(themeModeStringProvider.notifier).setThemeModeStringLight();
         } else if (newIndex == 1) {
+          //Set the state of themeModeProvider to ThemeMode.system
+          //and set the String of themeModeStringProvider
           ref.read(themeModeProvider.state).state = ThemeMode.system;
           ref.read(themeModeStringProvider.notifier).setThemeModeStringSystem();
         } else {
+          //Set the state of themeModeProvider to ThemeMode.dark
+          //and set the String of themeModeStringProvider
           ref.read(themeModeProvider.state).state = ThemeMode.dark;
           ref.read(themeModeStringProvider.notifier).setThemeModeStringDark();
         }
@@ -77,24 +95,38 @@ class ThemeColorSwitch extends ConsumerWidget {
     ];
 
     return ToggleButtons(
+      //The state of each button is controlled by isSelected,
+      //which is a list of bools that determine if a button
+      //is in an active, disabled, or selected state.
+      //They are both correlated by their index in the list.
+      //The length of isSelected has to match
+      //the length of the children list.
       isSelected: isSelected,
       onPressed: (int newIndex) {
         if (newIndex == 0) {
+          //Set the state of themeColorProvider to Outer Space
+          //and set the String of themeColorProvider
           ref.read(themeColorProvider.notifier).setThemeOuterSpace();
           ref
               .read(themeColorStringProvider.notifier)
               .setThemeColorStringOuterSpace();
         } else if (newIndex == 1) {
+          //Set the state of themeColorProvider to Blue Delight
+          //and set the String of themeColorProvider
           ref.read(themeColorProvider.notifier).setThemeBlueDelight();
           ref
               .read(themeColorStringProvider.notifier)
               .setThemeColorStringBlueDelight();
         } else if (newIndex == 2) {
+          //Set the state of themeColorProvider to Green Money
+          //and set the String of themeColorProvider
           ref.read(themeColorProvider.notifier).setThemeGreenMoney();
           ref
               .read(themeColorStringProvider.notifier)
               .setThemeColorStringGreenMoney();
         } else {
+          //Set the state of themeColorProvider to Red Red Wine
+          //and set the String of themeColorProvider
           ref.read(themeColorProvider.notifier).setThemeRedWine();
           ref
               .read(themeColorStringProvider.notifier)
