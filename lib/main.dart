@@ -31,7 +31,6 @@ class MainEntry extends ConsumerWidget {
       theme: ref.watch(themeLightProvider),
       darkTheme: ref.watch(themeDarkProvider),
       themeMode: ref.watch(themeModeProvider),
-      //SafeArea FTW. Makes your app evade notches and stuff
       initialRoute: '/',
       routes: customRoutes,
     );

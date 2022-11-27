@@ -22,6 +22,7 @@ export 'package:riverpoduniversity/themes/redredwine_colors.dart';
 
 export 'package:riverpoduniversity/widgets/appbar_widget.dart';
 export 'package:riverpoduniversity/widgets/drawer_widget.dart';
+export 'package:riverpoduniversity/widgets/navbutton_widget.dart';
 
 export 'package:riverpoduniversity/main.dart';
 export 'package:riverpoduniversity/screens/home_screen.dart';
