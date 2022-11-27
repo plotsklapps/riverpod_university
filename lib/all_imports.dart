@@ -14,6 +14,7 @@ export 'package:riverpoduniversity/providers/themedata_provider.dart';
 export 'package:riverpoduniversity/providers/themecolor_provider.dart';
 export 'package:riverpoduniversity/providers/themecolorstring_provider.dart';
 export 'package:riverpoduniversity/providers/counter_provider.dart';
+export 'package:riverpoduniversity/providers/weather_provider.dart';
 
 export 'package:riverpoduniversity/themes/bluedelight_colors.dart';
 export 'package:riverpoduniversity/themes/greenmoney_colors.dart';

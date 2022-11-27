@@ -12,9 +12,12 @@ PreferredSizeWidget appbarWidget = AppBar(
       builder: (context, ref, child) {
         return IconButton(
           onPressed: () {
+            //Reset ALL providers to default
             ref.invalidate(counterProvider);
             ref.invalidate(themeModeProvider);
             ref.invalidate(themeColorProvider);
+            ref.invalidate(currentCityProvider);
+            ref.invalidate(currentWeatherProvider);
           },
           icon: const Icon(
             Icons.restart_alt,
