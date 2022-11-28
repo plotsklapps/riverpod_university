@@ -1,85 +1,91 @@
 import 'package:riverpoduniversity/all_imports.dart';
 
-enum City {
-  amsterdam,
-  newyork,
-  jakarta,
-  moscow,
-}
+final cityNameProvider = StateProvider<String>((ref) {
+  return '⬆️ Start Here ⬆️';
+});
 
-//Returns a weatheremoji matching the city
-Future<String> getWeather(City city) {
-  //Fake it till you make it
-  return Future.delayed(
-    const Duration(seconds: 1),
-    () => {
-      City.amsterdam: '🌧',
-      City.newyork: '🌬',
-      City.jakarta: '☀',
-      City.moscow: '❄',
-    }[city]!,
-  );
-}
+class WeatherScreen extends ConsumerStatefulWidget {
+  const WeatherScreen({
+    Key? key,
+  }) : super(key: key);
 
-class WeatherScreen extends ConsumerWidget {
-  const WeatherScreen({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentWeather = ref.watch(currentWeatherProvider);
+  ConsumerState createState() => _WeatherScreenState();
+}
 
+class _WeatherScreenState extends ConsumerState<WeatherScreen> {
+  final TextEditingController citySearchController = TextEditingController();
+  bool searchIsVisible = false;
+
+  @override
+  void dispose() {
+    citySearchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final String cityName = ref.watch(cityNameProvider);
     return SafeArea(
       child: Scaffold(
         appBar: appbarWidget,
-        body: Column(
-          children: [
-            //.when() Function shows emoji when future is complete
-            currentWeather.when(
-              data: (weatherEmoji) {
-                return Text(
-                  weatherEmoji,
-                  style: const TextStyle(
-                    fontSize: 38.0,
-                  ),
-                );
-              },
-              //.when() Function requires error parameter
-              error: (_, __) {
-                return const Text(
-                  'Something terrible happened',
-                );
-              },
-              //.when() Function requires loading parameter
-              loading: () {
-                return const CircularProgressIndicator();
-              },
-            ),
-            Expanded(
-              //ListView.builder shows amount of cities from enum in a List
-              child: ListView.builder(
-                itemCount: City.values.length,
-                itemBuilder: (context, index) {
-                  //Set current index to City instance
-                  final City city = City.values[index];
-                  //If left and right Object are the same, store bool as true
-                  final bool isSelected =
-                      city == ref.watch(currentCityProvider);
-                  return ListTile(
-                    title: Text(
-                      city.toString(),
-                      textAlign: TextAlign.center,
-                    ),
-                    //If bool is true, show checkmark
-                    trailing:
-                        isSelected ? const Icon(Icons.check_outlined) : null,
-                    onTap: () {
-                      //Change state of currentCityProvider by tapping a List item
-                      ref.read(currentCityProvider.notifier).state = city;
-                    },
-                  );
-                },
+        body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/weather_background.png',
               ),
+              fit: BoxFit.cover,
             ),
-          ],
+          ),
+          constraints: const BoxConstraints.expand(),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                const Text(
+                  'Your current position on earth...',
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    await GeoLocator().getLocation();
+                  },
+                  child: const Text(
+                    'Show my current position on earth!',
+                  ),
+                ),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        cityName,
+                        style: const TextStyle(
+                          fontSize: 32.0,
+                        ),
+                      ),
+                      Visibility(
+                        visible: searchIsVisible,
+                        child: IconButton(
+                          onPressed: () async {
+                            await GeoLocator().getLocation();
+                          },
+                          icon: const Icon(
+                            Icons.search_outlined,
+                            size: 32.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

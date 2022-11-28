@@ -5,6 +5,7 @@ export 'package:flutter/material.dart';
 export 'package:flutter_riverpod/flutter_riverpod.dart';
 export 'package:flex_color_scheme/flex_color_scheme.dart';
 export 'package:google_fonts/google_fonts.dart';
+export 'package:geolocator/geolocator.dart';
 
 export 'package:riverpoduniversity/routes.dart';
 
@@ -28,4 +29,5 @@ export 'package:riverpoduniversity/widgets/navbutton_widget.dart';
 export 'package:riverpoduniversity/main.dart';
 export 'package:riverpoduniversity/screens/home_screen.dart';
 export 'package:riverpoduniversity/screens/counter_screen.dart';
+//Working on new (WORKING) weather screen
 export 'package:riverpoduniversity/screens/weather_screen.dart';

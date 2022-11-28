@@ -16,8 +16,8 @@ PreferredSizeWidget appbarWidget = AppBar(
             ref.invalidate(counterProvider);
             ref.invalidate(themeModeProvider);
             ref.invalidate(themeColorProvider);
-            ref.invalidate(currentCityProvider);
-            ref.invalidate(currentWeatherProvider);
+            // ref.invalidate(currentCityProvider);
+            // ref.invalidate(currentWeatherProvider);
           },
           icon: const Icon(
             Icons.restart_alt,
