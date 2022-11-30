@@ -10,42 +10,42 @@ class WeatherScreen extends ConsumerStatefulWidget {
 }
 
 class _WeatherScreenState extends ConsumerState<WeatherScreen> {
-  Position? _position;
-  void getCurrentLocation() async {
-    Position position = await getPosition();
-    setState(() {
-      _position = position;
-    });
-  }
-
-  Future<Position> getPosition() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location Permission denied...');
-      }
-    }
-    return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-  }
-
   @override
   Widget build(BuildContext context) {
+    double? latitude = ref.watch(latitudeProvider);
+    double? longitude = ref.watch(longitudeProvider);
     return SafeArea(
       child: Scaffold(
         appBar: appbarWidget,
         body: Padding(
           padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              Text(
-                _position.toString(),
-              ),
-              const SizedBox(
-                height: 24.0,
-              ),
-            ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () async {
+                    latitude =
+                        await ref.read(latitudeProvider.notifier).getLatitude();
+                    longitude = await ref
+                        .read(longitudeProvider.notifier)
+                        .getLongitude();
+                  },
+                  child: const Text(
+                    'Retrieve current position & Weather forecast',
+                  ),
+                ),
+                const SizedBox(
+                  height: 24.0,
+                ),
+                Text(
+                  'Latitude: $latitude',
+                ),
+                Text(
+                  'Longitude: $longitude',
+                ),
+              ],
+            ),
           ),
         ),
       ),
