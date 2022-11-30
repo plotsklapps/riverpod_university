@@ -1,5 +1,11 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:riverpoduniversity/all_imports.dart';
 
+const apiKey = 'fa5c9b4de78bd4575fb68f2ec0e78b19';
+const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
+
+//Create provider that can dig in to Latitude class
 final latitudeProvider = StateNotifierProvider<Latitude, double?>((ref) {
   return Latitude();
 });
@@ -7,6 +13,7 @@ final latitudeProvider = StateNotifierProvider<Latitude, double?>((ref) {
 class Latitude extends StateNotifier<double?> {
   Latitude() : super(null);
 
+  //Method to ONLY get the position.latitude (double)
   Future<double?> getLatitude() async {
     final Position position = await GeoLocator().getCurrentPosition();
     state = position.latitude;
@@ -14,6 +21,7 @@ class Latitude extends StateNotifier<double?> {
   }
 }
 
+//Create provider that can dig in to Longitude class
 final longitudeProvider = StateNotifierProvider<Longitude, double?>((ref) {
   return Longitude();
 });
@@ -21,6 +29,7 @@ final longitudeProvider = StateNotifierProvider<Longitude, double?>((ref) {
 class Longitude extends StateNotifier<double?> {
   Longitude() : super(null);
 
+  //Method to ONLY get the position.longitude (double)
   Future<double?> getLongitude() async {
     final Position position = await GeoLocator().getCurrentPosition();
     state = position.longitude;
@@ -64,5 +73,63 @@ class GeoLocator {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
+  }
+}
+
+final weatherProvider = StateNotifierProvider<Weather, dynamic>((ref) {
+  return Weather(
+      latitude: ref.watch(latitudeProvider),
+      longitude: ref.watch(longitudeProvider));
+});
+
+class Weather extends StateNotifier<dynamic> {
+  double? latitude;
+  double? longitude;
+
+  Weather({this.latitude, this.longitude}) : super(null);
+
+  Future<dynamic> getWeatherData() async {
+    http.Response response = await http.get(
+      Uri.parse(
+          'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey'),
+    );
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      print(response.statusCode);
+    }
+    return null;
+  }
+
+  String getWeatherIcon(int condition) {
+    if (condition < 300) {
+      return '🌩';
+    } else if (condition < 400) {
+      return '🌧';
+    } else if (condition < 600) {
+      return '☔️';
+    } else if (condition < 700) {
+      return '☃️';
+    } else if (condition < 800) {
+      return '🌫';
+    } else if (condition == 800) {
+      return '☀️';
+    } else if (condition <= 804) {
+      return '☁️';
+    } else {
+      return '🤷‍';
+    }
+  }
+
+  String getMessage(int temp) {
+    if (temp > 25) {
+      return 'It\'s 🍦 time';
+    } else if (temp > 20) {
+      return 'Time for shorts and 👕';
+    } else if (temp < 10) {
+      return 'You\'ll need 🧣 and 🧤';
+    } else {
+      return 'Bring a 🧥 just in case';
+    }
   }
 }
