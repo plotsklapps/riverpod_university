@@ -18,7 +18,8 @@ PreferredSizeWidget appbarWidget = AppBar(
             ref.invalidate(themeColorProvider);
             ref.invalidate(latitudeProvider);
             ref.invalidate(longitudeProvider);
-            ref.invalidate(futureLatitudeProvider);
+            // ref.invalidate(futureLatitudeProvider);
+            // ref.invalidate(futureLongitudeProvider);
           },
           icon: const Icon(
             Icons.restart_alt,

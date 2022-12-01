@@ -23,6 +23,7 @@ dependencies:
   flex_color_scheme: ^6.0.1
   google_fonts: ^3.0.1
   geolocator: ^9.0.2
+  logger: ^1.1.0
 
 dev_dependencies:
   flutter_test:

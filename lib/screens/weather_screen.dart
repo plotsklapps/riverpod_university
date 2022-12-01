@@ -10,36 +10,36 @@ class WeatherScreen extends ConsumerStatefulWidget {
 }
 
 class _WeatherScreenState extends ConsumerState<WeatherScreen> {
-  dynamic weatherData;
-  int? temperature;
-  String? weatherIcon;
-  String? weatherMessage;
-  String? cityName;
-
-  void updateUI(dynamic weatherData) {
-    setState(() {
-      if (weatherData == null) {
-        temperature = 0;
-        weatherIcon = 'Error';
-        weatherMessage = 'Unable to get weather data';
-        cityName = '';
-        return;
-      }
-      double temp = weatherData['main']['temp'];
-      temperature = temp.toInt();
-      var condition = weatherData['weather'][0]['id'];
-      weatherIcon = Weather().getWeatherIcon(condition);
-      weatherMessage = Weather().getMessage(temperature!);
-      cityName = weatherData['name'];
-    });
+  //Method to change providerstates according to other providerstates
+  Future<void> handleWeatherData(weatherData) async {
+    //Particular weatherData from getWeatherData() into temperatureProvider<int?>
+    ref.read(temperatureProvider.notifier).state =
+        await weatherData['main']['temp'].toInt();
+    //Particular weatherData from getWeatherData() into conditionProvider<int>
+    ref.read(conditionProvider.notifier).state =
+        await weatherData['weather'][0]['id'];
+    //int from conditionProvider into weatherIconProvider<String?>
+    ref.read(weatherIconProvider.notifier).state =
+        Weather().getWeatherIcon(ref.watch(conditionProvider));
+    //int? from temperatureProvider into getMessage(), result into weatherMessageProvider<String?>
+    ref.read(weatherMessageProvider.notifier).state =
+        Weather().getMessage(ref.watch(temperatureProvider));
+    //Particular weatherData from getWeatherData() into cityNameProvider<String?>
+    ref.read(cityNameProvider.notifier).state = await weatherData['name'];
   }
 
   @override
   Widget build(BuildContext context) {
+    //Setting variables according to latest Provider states
+    dynamic weatherData = ref.watch(weatherProvider);
     double? latitude = ref.watch(latitudeProvider);
     double? longitude = ref.watch(longitudeProvider);
-    var futureLatitude = ref.watch(futureLatitudeProvider);
-    var futureLongitude = ref.watch(futureLongitudeProvider);
+    // var futureLatitude = ref.watch(futureLatitudeProvider);
+    // var futureLongitude = ref.watch(futureLongitudeProvider);
+    int? temperature = ref.watch(temperatureProvider);
+    String? weatherIcon = ref.watch(weatherIconProvider);
+    String? weatherMessage = ref.watch(weatherMessageProvider);
+    String? cityName = ref.watch(cityNameProvider);
 
     return SafeArea(
       child: Scaffold(
@@ -52,7 +52,6 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    print('Button pressed!');
                     //Set variable latitude to double provided by latitudeProvider
                     latitude =
                         await ref.read(latitudeProvider.notifier).getLatitude();
@@ -64,7 +63,8 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                     weatherData = await ref
                         .read(weatherProvider.notifier)
                         .getWeatherData();
-                    updateUI(weatherData);
+                    //Call handleWeatherData() to retrieve new data for state
+                    await handleWeatherData(weatherData);
                   },
                   child: const Text(
                     'Retrieve current position & Weather forecast',
@@ -74,7 +74,7 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                   height: 24.0,
                 ),
                 const Text(
-                  'Latitude with StateNotifierProvider:',
+                  'Latitude:',
                   style: (TextStyle(
                     fontWeight: FontWeight.bold,
                   )),
@@ -85,30 +85,31 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                     fontSize: 24.0,
                   ),
                 ),
+                //If you want to use the following code, you also need to uncomment the code in weather_provider.dart for futureLatitudeProvider
+                // const Text(
+                //   'Latitude with FutureProvider:',
+                //   style: TextStyle(fontWeight: FontWeight.bold),
+                // ),
+                // futureLatitude.when(
+                //   data: (latitude) {
+                //     return Text(
+                //       latitude.toString(),
+                //       style: const TextStyle(
+                //         fontSize: 24.0,
+                //       ),
+                //     );
+                //   },
+                //   error: (error, stacktrace) {
+                //     return Text(
+                //       'Something went wrong... $error',
+                //     );
+                //   },
+                //   loading: () {
+                //     return const CircularProgressIndicator();
+                //   },
+                // ),
                 const Text(
-                  'Latitude with FutureProvider:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                futureLatitude.when(
-                  data: (latitude) {
-                    return Text(
-                      latitude.toString(),
-                      style: const TextStyle(
-                        fontSize: 24.0,
-                      ),
-                    );
-                  },
-                  error: (error, stacktrace) {
-                    return Text(
-                      'Something went wrong... $error',
-                    );
-                  },
-                  loading: () {
-                    return const CircularProgressIndicator();
-                  },
-                ),
-                const Text(
-                  'Longitude with StateNotifierProvider:',
+                  'Longitude:',
                   style: (TextStyle(
                     fontWeight: FontWeight.bold,
                   )),
@@ -119,28 +120,29 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                     fontSize: 24.0,
                   ),
                 ),
-                const Text(
-                  'Latitude with FutureProvider:',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                futureLongitude.when(
-                  data: (longitude) {
-                    return Text(
-                      longitude.toString(),
-                      style: const TextStyle(
-                        fontSize: 24.0,
-                      ),
-                    );
-                  },
-                  error: (error, stacktrace) {
-                    return Text(
-                      'Something went wrong... $error',
-                    );
-                  },
-                  loading: () {
-                    return const CircularProgressIndicator();
-                  },
-                ),
+                //If you want to use the following code, you also need to uncomment the code in weather_provider.dart for futureLongitudeProvider
+                // const Text(
+                //   'Latitude with FutureProvider:',
+                //   style: TextStyle(fontWeight: FontWeight.bold),
+                // ),
+                // futureLongitude.when(
+                //   data: (longitude) {
+                //     return Text(
+                //       longitude.toString(),
+                //       style: const TextStyle(
+                //         fontSize: 24.0,
+                //       ),
+                //     );
+                //   },
+                //   error: (error, stacktrace) {
+                //     return Text(
+                //       'Something went wrong... $error',
+                //     );
+                //   },
+                //   loading: () {
+                //     return const CircularProgressIndicator();
+                //   },
+                // ),
                 const SizedBox(
                   height: 24.0,
                 ),
@@ -150,26 +152,48 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                     temperature != null
                         ? Text(
                             '$temperature°C',
+                            style: const TextStyle(
+                              fontSize: 48.0,
+                            ),
                           )
                         : const Text(
-                            'Huh?',
+                            'No data 🤷‍♂️',
                           ),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
                     weatherIcon != null
-                        ? Text(weatherIcon!)
+                        ? Text(
+                            weatherIcon,
+                            style: const TextStyle(
+                              fontSize: 64.0,
+                            ),
+                          )
                         : const Text(
-                            'Huh?',
+                            'No data 🤷‍♂️',
                           ),
                   ],
                 ),
                 weatherMessage != null
-                    ? Text('$weatherMessage')
+                    ? Text(
+                        weatherMessage,
+                        style: const TextStyle(
+                          fontSize: 24.0,
+                        ),
+                      )
                     : const Text(
-                        'Huh?',
+                        'No data 🤷‍♂️',
                       ),
                 cityName != null
-                    ? Text('$cityName')
+                    ? Text(
+                        cityName,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24.0,
+                        ),
+                      )
                     : const Text(
-                        'Huh?',
+                        'No data 🤷‍♂️',
                       ),
               ],
             ),
