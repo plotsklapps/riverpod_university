@@ -5,13 +5,29 @@ import 'package:riverpoduniversity/all_imports.dart';
 const apiKey = 'fa5c9b4de78bd4575fb68f2ec0e78b19';
 const openWeatherMapURL = 'https://api.openweathermap.org/data/2.5/weather';
 
+//The FutureProvider and StateNotifierProvider below do the exact same thing, both return a double. FutureProvider has a .when() method which can be useful in the UI and is set when user enters the WeatherScreen(). StateNotifierProvider can be handled by user interaction in the WeatherScreen() (press on a button) and can easily be invalidated.
+
+//Create provider that provides a future of type double for latitude
+final FutureProvider<double?> futureLatitudeProvider =
+    FutureProvider<double?>((ref) async {
+  final Position position = await GeoLocator().getCurrentPosition();
+  return position.latitude;
+});
+
+//Create provider that provides a future of type double for langitude
+final FutureProvider<double?> futureLongitudeProvider =
+    FutureProvider<double?>((ref) async {
+  final Position position = await GeoLocator().getCurrentPosition();
+  return position.longitude;
+});
+
 //Create provider that can dig in to Latitude class
 final latitudeProvider = StateNotifierProvider<Latitude, double?>((ref) {
   return Latitude();
 });
 
 class Latitude extends StateNotifier<double?> {
-  Latitude() : super(null);
+  Latitude() : super(0.0);
 
   //Method to ONLY get the position.latitude (double)
   Future<double?> getLatitude() async {
@@ -27,7 +43,7 @@ final longitudeProvider = StateNotifierProvider<Longitude, double?>((ref) {
 });
 
 class Longitude extends StateNotifier<double?> {
-  Longitude() : super(null);
+  Longitude() : super(0.0);
 
   //Method to ONLY get the position.longitude (double)
   Future<double?> getLongitude() async {
@@ -91,7 +107,7 @@ class Weather extends StateNotifier<dynamic> {
   Future<dynamic> getWeatherData() async {
     http.Response response = await http.get(
       Uri.parse(
-          'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey'),
+          'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric'),
     );
     if (response.statusCode == 200) {
       return jsonDecode(response.body);
