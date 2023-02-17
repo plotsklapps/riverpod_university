@@ -19,9 +19,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_riverpod: ^2.0.2
-  flex_color_scheme: ^6.0.1
-  google_fonts: ^3.0.1
+  flutter_riverpod: ^2.2.0
+  flex_color_scheme: ^6.1.2
+  google_fonts: ^4.0.3
   geolocator: ^9.0.2
   logger: ^1.1.0
 

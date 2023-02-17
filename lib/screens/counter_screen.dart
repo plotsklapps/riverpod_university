@@ -29,6 +29,8 @@ class CounterScreen extends ConsumerWidget {
         onPressed: () {
           //See counter_provider.dart. I've made a function
           //on CounterState() class that adds 1 every click.
+          //Please note I use ref.READ here because you're
+          //actually changing state, not just watching it
           ref.read(counterProvider.notifier).addOneOnClick();
         },
         tooltip: 'Guess what. This adds 1.',

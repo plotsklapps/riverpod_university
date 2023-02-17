@@ -21,10 +21,12 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
     //int from conditionProvider into weatherIconProvider<String?>
     ref.read(weatherIconProvider.notifier).state =
         Weather().getWeatherIcon(ref.watch(conditionProvider));
-    //int? from temperatureProvider into getMessage(), result into weatherMessageProvider<String?>
+    //int? from temperatureProvider into getMessage(), result
+    //into weatherMessageProvider<String?>
     ref.read(weatherMessageProvider.notifier).state =
         Weather().getMessage(ref.watch(temperatureProvider));
-    //Particular weatherData from getWeatherData() into cityNameProvider<String?>
+    //Particular weatherData from getWeatherData() into
+    //cityNameProvider<String?>
     ref.read(cityNameProvider.notifier).state = await weatherData['name'];
   }
 
@@ -85,7 +87,11 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                     fontSize: 24.0,
                   ),
                 ),
-                //If you want to use the following code, you also need to uncomment the code in weather_provider.dart for futureLatitudeProvider
+                //If you want to use the following code, you also need to
+                //uncomment the code in weather_provider.dart for
+                //futureLatitudeProvider. Endgame is the same, but it looks
+                //completely different from the code that is active now.
+                //
                 // const Text(
                 //   'Latitude with FutureProvider:',
                 //   style: TextStyle(fontWeight: FontWeight.bold),
@@ -120,7 +126,11 @@ class _WeatherScreenState extends ConsumerState<WeatherScreen> {
                     fontSize: 24.0,
                   ),
                 ),
-                //If you want to use the following code, you also need to uncomment the code in weather_provider.dart for futureLongitudeProvider
+                //If you want to use the following code, you also need to
+                //uncomment the code in weather_provider.dart for
+                //futureLatitudeProvider. Endgame is the same, but it looks
+                //completely different from the code that is active now.
+                //
                 // const Text(
                 //   'Latitude with FutureProvider:',
                 //   style: TextStyle(fontWeight: FontWeight.bold),

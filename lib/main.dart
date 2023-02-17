@@ -1,5 +1,4 @@
 import 'package:riverpoduniversity/all_imports.dart';
-import 'package:riverpoduniversity/screens/home_screen.dart';
 
 void main() {
   //Somehow I think ensuring initialization has become mandatory?
@@ -25,11 +24,12 @@ class MainEntry extends ConsumerWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Riverpod University',
+      //Watch Providers for light and dark, user decides in app
+      theme: ref.watch(themeLightProvider),
+      darkTheme: ref.watch(themeDarkProvider),
       //Watch the themeModeProvider and return ThemeMode.system
       //in first instance. After that, user decides and controls
       //the themeMode via themeDataProvider
-      theme: ref.watch(themeLightProvider),
-      darkTheme: ref.watch(themeDarkProvider),
       themeMode: ref.watch(themeModeProvider),
       initialRoute: '/',
       routes: customRoutes,
