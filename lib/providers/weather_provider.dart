@@ -2,7 +2,12 @@ import 'package:riverpoduniversity/all_imports.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 
-//The FutureProvider and StateNotifierProvider below do the exact same thing, both return a double. FutureProvider has a .when() method which can be useful in the UI and is set when user enters the WeatherScreen(). StateNotifierProvider can be handled by user interaction in the WeatherScreen() (press on a button) and can easily be invalidated.
+//The FutureProvider and StateNotifierProvider below do the exact
+//same thing, both return a double. FutureProvider has a .when()
+//method which can be useful in the UI and is set when user
+//enters the WeatherScreen(). StateNotifierProvider can be
+//handled by user interaction in the WeatherScreen()
+//(press on a button) and can easily be invalidated.
 
 // //Create provider that provides a future of type double for latitude
 // final FutureProvider<double?> futureLatitudeProvider =
@@ -50,7 +55,10 @@ class Longitude extends StateNotifier<double?> {
   }
 }
 
-//Overkill I know, but it's practice. And guess what practice does? It makes perfect! So bare with me and look at these StateProviders with null starting value for all nullables. Why? Because I use null in the UI to show the 'No data <emoticon>'
+//Overkill I know, but it's practice. And guess what practice
+//does? It makes perfect! So bare with me and look at these
+//StateProviders with null starting value for all nullables.
+//Why? Because I use null in the UI to show the 'No data <emoticon>'
 final temperatureProvider = StateProvider<int?>((ref) {
   return null;
 });
@@ -71,7 +79,14 @@ final conditionProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-//weatherProvider is a cool one, if I say so myself. I you reference weatherProvider, it will return a Weather() instance WITH the current coordinates given by user. Next to that, the Weather() instance provides a getWeatherData() function that retrieves a response from openweathermap.org and returns it as a JSON object.  Next to that is a getMessage() function that checks the temperature from temperatureProvider and returns a String with some text about the weather.
+//weatherProvider is a cool one, if I say so myself. I you reference
+//weatherProvider, it will return a Weather() instance WITH the
+//current coordinates given by user. Next to that, the Weather()
+//instance provides a getWeatherData() function that retrieves a
+//response from openweathermap.org and returns it as a JSON object.
+//Next to that is a getMessage() function that checks the temperature
+//from temperatureProvider and returns a String with some text
+//about the weather.
 final weatherProvider = StateNotifierProvider<Weather, dynamic>((ref) {
   return Weather(
       latitude: ref.watch(latitudeProvider),
@@ -85,9 +100,13 @@ class Weather extends StateNotifier<dynamic> {
   Weather({this.latitude, this.longitude}) : super(null);
 
   Future<dynamic> getWeatherData() async {
+    //I know, I know, NEVER use apiKeys in public repo's, but
+    //I want you to clone this project and go right ahead so
+    //everything works. Please do not misuse my apiKey.
     http.Response response = await http.get(
       Uri.parse(
-          'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric'),
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric',
+      ),
     );
     if (response.statusCode == 200) {
       return jsonDecode(response.body);

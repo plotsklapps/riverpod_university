@@ -6,7 +6,7 @@ final counterProvider = StateNotifierProvider<CounterState, int>((ref) {
 });
 
 //CounterState returns a starting value (0) and +1
-//every time the function gets called
+//every time the addOneOnClick function gets called
 class CounterState extends StateNotifier<int> {
   CounterState() : super(0);
 
